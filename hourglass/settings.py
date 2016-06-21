@@ -69,7 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -104,7 +104,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-#django cors headers
+# django cors headers
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Static files (CSS, JavaScript, Images)
@@ -114,7 +114,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'static'),
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -133,8 +133,10 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt' : "%d/%b/%Y %H:%M:%S"
+            'format':
+                "[%(asctime)s] %(levelname)s "
+                "[%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
         },
         'simple': {
             'format': '%(levelname)s %(message)s'
@@ -161,20 +163,20 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers':['console', 'file'],
+            'handlers': ['console', 'file'],
             'propagate': True,
-            'level':'INFO',
+            'level': 'INFO',
         },
         'contracts': {
             'handlers': ['console', 'contracts_file'],
             'propagate': True,
-            'level':'INFO',
+            'level': 'INFO',
         },
     },
 }
 
 DATABASES = {}
-DATABASES['default'] =  dj_database_url.config()
+DATABASES['default'] = dj_database_url.config()
 
 SECURE_SSL_REDIRECT = True
 # Amazon ELBs pass on X-Forwarded-Proto.
