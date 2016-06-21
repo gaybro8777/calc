@@ -12,3 +12,8 @@ DATABASES = {
 SECRET_KEY = 'I am an insecure secret key intended ONLY for dev/testing.'
 
 SECURE_SSL_REDIRECT = False
+
+ADMIN_EMAIL = ''
+
+UAA_OAUTH_APP_NAME = ''
+UAA_OAUTH_SECRET = ''

@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 API_HOST = os.environ.get('API_HOST', '/api/')
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -179,7 +178,17 @@ SECURE_SSL_REDIRECT = True
 # Amazon ELBs pass on X-Forwarded-Proto.
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-SECRET_KEY = ''
+# List of required configuration variables
+required_config_vars = [
+    'SECRET_KEY',
+    'ADMIN_EMAIL',
+    'UAA_OAUTH_APP_NAME',
+    'UAA_OAUTH_SECRET'
+]
+
+# set all required config variables to ''
+for required_var in required_config_vars:
+    globals()[required_var] = ''
 
 if IS_RUNNING_IN_DOCKER:
     from hourglass.docker_settings import *
@@ -189,5 +198,11 @@ else:
     except ImportError:
         pass
 
-if not SECRET_KEY:
-    SECRET_KEY = os.environ['SECRET_KEY']
+# Check that each required config variable has been set,
+# if not, attempt to get the value from environemnt variable of the same name.
+# This will throw a KeyError if a value is not found.
+# TODO: this will eventually need to be modified
+# to work with values from VCAP_SERVICES
+for required_var in required_config_vars:
+    if not globals()[required_var]:
+        globals()[required_var] = os.environ[required_var]
