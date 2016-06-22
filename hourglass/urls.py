@@ -5,15 +5,13 @@ from django.http import HttpResponse
 
 from api import urls as api_urls
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'hourglass.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+urlpatterns = patterns(
+    '',
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
-    url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
+    url(r'^about/$', TemplateView.as_view(template_name='about.html'),
+        name='about'),
     url(r'^api/', include(api_urls)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^tests/$', TemplateView.as_view(template_name='tests.html')),
     url(r'^robots.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /")),
 )
-
