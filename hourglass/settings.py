@@ -178,18 +178,6 @@ SECURE_SSL_REDIRECT = True
 # Amazon ELBs pass on X-Forwarded-Proto.
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-# List of required configuration variables
-required_config_vars = [
-    'SECRET_KEY',
-    'ADMIN_EMAIL',
-    'UAA_OAUTH_APP_NAME',
-    'UAA_OAUTH_SECRET'
-]
-
-# set all required config variables to ''
-for required_var in required_config_vars:
-    globals()[required_var] = ''
-
 if IS_RUNNING_IN_DOCKER:
     from hourglass.docker_settings import *
 else:
@@ -198,11 +186,18 @@ else:
     except ImportError:
         pass
 
+# List of required configuration variables
+required_config_vars = [
+    'SECRET_KEY',
+    'ADMIN_EMAIL',
+    'UAA_OAUTH_APP_NAME',
+    'UAA_OAUTH_SECRET'
+]
+
 # Check that each required config variable has been set,
-# if not, attempt to get the value from environemnt variable of the same name.
+# if not, attempt to get the value from environment variable of the same name.
 # This will throw a KeyError if a value is not found.
-# TODO: this will eventually need to be modified
-# to work with values from VCAP_SERVICES
+# TODO: this will eventually need to be modified to work with VCAP_SERVICES
 for required_var in required_config_vars:
-    if not globals()[required_var]:
+    if required_var not in globals():
         globals()[required_var] = os.environ[required_var]
