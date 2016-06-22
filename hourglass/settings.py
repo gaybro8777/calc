@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
 
     'hourglass_site',
 
@@ -56,6 +57,12 @@ INSTALLED_APPS = (
     'djangosecure',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'hourglass.uaa_backend.UAAOpenId',
+)
+
+# This is the default LOGIN_URL
+# LOGIN_URL = '/accounts/login'
 
 MIDDLEWARE_CLASSES = (
     'djangosecure.middleware.SecurityMiddleware',
@@ -79,7 +86,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages"
+    "django.contrib.messages.context_processors.messages",
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
 
 )
 
@@ -186,18 +195,22 @@ else:
     except ImportError:
         pass
 
+# uaa auth endpoint
+# UAA_OAUTH_AUTH_URL = 'https://uaa.cloud.gov/oauth/authorize'
+# UAA_OAUTH_TOKEN_URL = 'https://uaa.cloud.gov/oauth/token'
+
 # List of required configuration variables
 required_config_vars = [
     'SECRET_KEY',
-    'ADMIN_EMAIL',
-    'UAA_OAUTH_APP_NAME',
-    'UAA_OAUTH_SECRET'
+    'CALC_ADMIN_EMAIL',
+    'UAA_OAUTH_CALLBACK_URL',   # http(s)://<host_address>/oauth/callback
+    'SOCIAL_AUTH_UAA_KEY',      # uaa client app name
+    'SOCIAL_AUTH_UAA_SECRET',   # uaa client app secret
 ]
 
 # Check that each required config variable has been set,
 # if not, attempt to get the value from environment variable of the same name.
 # This will throw a KeyError if a value is not found.
-# TODO: this will eventually need to be modified to work with VCAP_SERVICES
 for required_var in required_config_vars:
     if required_var not in globals():
         globals()[required_var] = os.environ[required_var]
