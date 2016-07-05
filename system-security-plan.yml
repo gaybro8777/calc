@@ -1,10 +1,10 @@
 ---
 name: CALC
-uniqueID: <MB number – see https://docs.google.com/spreadsheets/d/1v4QfXGaJVy9-CZ0n6cFLHGGs_5TL1l8uCh6ZyNYjMDk/edit#gid=2047916505>
+uniqueID: MB18FIX019268-2
 version: <application version>
 # descriptions:
 # https://18f.gsa.gov/dashboard/
-phase: <discovery|alpha|beta|live>
+phase: live
 # `D26 Civilian Operations` is most common for 18F projects.
 # http://csrc.nist.gov/publications/nistpubs/800-60-rev1/SP800-60_Vol1-Rev1.pdf#page=23
 information-types:
@@ -14,7 +14,7 @@ information-types:
 confidentiality: low
 integrity: low
 availability: low
-security-baseline: <open data|low|moderate|high>
+security-baseline: low
 
 system-type: <major|minor|general support>
 level-of-identity-assurance: <0 if no authentication, or a link to SSP of the forthcoming identity system>
@@ -51,10 +51,10 @@ staff:
     email: <developer's email>
 leveraged-authorizations:
 - https://www.fedramp.gov/marketplace/compliant-systems/amazon-web-services-aws-eastwest-us-public-cloud/
-purpose: <link to README>
+purpose: https://github.com/18F/calc/blob/develop/README.md
 components:
-- <link to item under https://18f.gsa.gov/dashboard/>
-- <links to repositories>
+- https://18f.gsa.gov/project/calc/
+- https://github.com/18f/calc
 
 # these will be the same unless your architecture is especially complex
 system-diagram: <link>
