@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load compress %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="{% static 'hourglass_site/style/main.css' %}"/>
 
     <![if gt IE 8]>
+    {% compress js %}
     <script>
       var API_HOST = "{{ API_HOST }}";
     </script>
@@ -23,6 +25,7 @@
     <script src="{% static 'hourglass_site/js/hourglass.js' %}"></script>
     <script src="{% static 'hourglass_site/js/vendor/jquery.tooltipster.js' %}"></script>
     <script src="{% static 'hourglass_site/js/vendor/jquery.nouislider.all.min.js' %}"></script>
+    {% endcompress %}
     <![endif]>
     <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     {% block head %}
@@ -139,15 +142,15 @@
 
         // anonymize user IPs (chops off the last IP triplet)
         ga('set', 'anonymizeIp', true);
-        
+
         // forces SSL even if the page were somehow loaded over http://
         ga('set', 'forceSSL', true);
-  
+
         ga('create', 'UA-48605964-21', 'auto');
         ga('send', 'pageview');
     </script>
 
-    <!-- Digital Analytics Program roll-up, see https://analytics.usa.gov for data -->    
+    <!-- Digital Analytics Program roll-up, see https://analytics.usa.gov for data -->
     <script id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA"></script>
 
     <![if gt IE 8]>

@@ -52,7 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 
     'hourglass_site',
@@ -64,11 +64,12 @@ INSTALLED_APPS = (
     'corsheaders',
     'djangosecure',
     'uaa_client',
+    'compressor',
 )
 
 MIDDLEWARE_CLASSES = (
     'djangosecure.middleware.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -126,9 +127,12 @@ STATICFILES_DIRS = (
     # os.path.join(BASE_DIR, 'static'),
 )
 
-if not DEBUG:
-    STATICFILES_STORAGE = ('whitenoise.storage.'
-                           'CompressedManifestStaticFilesStorage')
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
 
 PAGINATION = 200
 REST_FRAMEWORK = {
