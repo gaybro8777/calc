@@ -44,11 +44,11 @@ staff:
     unit: 18F
     email: devops@gsa.gov
   technical-lead:
-    name: <developer's name>
+    name: Atul Varma
     title: Technical Lead
     org: General Services Administration
     unit: 18F
-    email: <developer's email>
+    email: atul.varma@gsa.gov
 leveraged-authorizations:
 - https://www.fedramp.gov/marketplace/compliant-systems/amazon-web-services-aws-eastwest-us-public-cloud/
 purpose: https://github.com/18F/calc/blob/develop/README.md
