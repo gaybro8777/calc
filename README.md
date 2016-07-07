@@ -156,12 +156,28 @@ string), the boolean is true; otherwise, it's false.
 * `ENABLE_SEO_INDEXING` is a boolean value that indicates whether to
   indicate to search engines that they can index the site.
 
+* `FORCE_DISABLE_SECURE_SSL_REDIRECT` is a boolean value that indicates
+  whether to disable redirection from http to https. Because such
+  redirection is enabled by default when `DEBUG` is false, this option
+  can be useful when you want to simulate *almost* everything about a
+  production environment without having to setup SSL.
+
 * `UAA_CLIENT_ID` is your cloud.gov/Cloud Foundry UAA client ID. It
   defaults to `calc-dev`.
 
 * `UAA_CLIENT_SECRET` is your cloud.gov/Cloud Foundry UAA client secret.
   If this is undefined and `DEBUG` is true, then a built-in Fake UAA Provider
   will be used to "simulate" cloud.gov login.
+
+* `WHITELISTED_IPS` is a comma-separated string of IP addresses that specifies
+  IPs that the REST API will accept requests from. Any IPs not in the list
+  attempting to access the API will receive a 403 Forbidden response.
+  Example: `127.0.0.1,192.168.1.1`.
+
+* `API_HOST` is the relative or absolute URL used to access the
+  API hosted by CALC. It defaults to `/api/` but may need to be changed
+  if the API has a proxy in front of it, as it likely will be if deployed
+  on government infrastructure. For more information, see [`deploy.md`][].
 
 ## Staff Login
 
