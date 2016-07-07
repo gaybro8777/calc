@@ -130,9 +130,12 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # other finders..
     'compressor.finders.CompressorFinder',
 )
+
+# Usually compressor is disabled when DEBUG is True,
+# but we enable it manually here for dev-prod parity
+COMPRESS_ENABLED = True
 
 PAGINATION = 200
 
