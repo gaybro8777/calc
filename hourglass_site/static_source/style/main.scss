@@ -1,7 +1,7 @@
 @charset 'utf-8';
-@import 'variables';
-@import url(skeleton/normalize.css);
-@import url(skeleton/skeleton.css);
+@import 'partials/variables';
+@import 'skeleton/normalize';
+@import 'skeleton/skeleton';
 
 body {
   font-family: Lato, Helvetica, Arial, sans-serif;
@@ -78,7 +78,7 @@ input.button-primary[type="button"]:focus {
 
 .sr-only {
   position: absolute !important;
-  height: 1px; width: 1px; 
+  height: 1px; width: 1px;
   overflow: hidden;
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
@@ -342,4 +342,3 @@ footer {
 fieldset {
   margin: 0;
 }
-

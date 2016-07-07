@@ -1,4 +1,5 @@
 /static
+/hourglass_site/static/hourglass_site/style
 *.pyc
 local_settings.py
 *.swp
