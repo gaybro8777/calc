@@ -19,30 +19,16 @@ var paths = {
   sass: '**/*.scss',
 };
 
-// run in production mode with the `--production` flag
-// ex: `npm run gulp -- build --production`
-var isProd = !!gutil.env.production;
-gutil.log('Running in',
-  gutil.colors.cyan(isProd ? 'PRODUCTION' : 'DEVELOPMENT'),
-  'mode'
-);
-
-var gzip_options = {
-    threshold: '1kb',
-    gzipOptions: {
-        level: 9
-    }
-};
-
 // running `gulp` will default to watching and dist'ing files
 gulp.task('default', ['watch']);
 
-// TODO: production build
-// Will need to run before collectstatic
+// production build
+// will need to run before collectstatic
+// `npm run gulp -- build`
 gulp.task('build', ['sass']);
 
 
-/* Compile Our Sass */
+// compile SASS
 gulp.task('sass', function () {
     return gulp.src(dirs.src.style + paths.sass)
         .pipe(sass())
@@ -50,11 +36,16 @@ gulp.task('sass', function () {
         .pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
         .pipe(gulp.dest(dirs.dest.style))
-        .pipe(gzip(gzip_options))
+        .pipe(gzip({
+            threshold: '1kb',
+            gzipOptions: {
+                level: 9
+            }
+        }))
         .pipe(gulp.dest(dirs.dest.style));
 });
 
-/* Watch Files For Changes */
+// watch files for chnages
 gulp.task('watch', ['sass'], function () {
     gulp.watch(dirs.src.style + paths.sass, ['sass']);
 });
