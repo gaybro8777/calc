@@ -3,7 +3,7 @@ Django==1.8.13
 django-cors-headers==1.1.0
 django-nose==1.4.3
 django-secure==1.0.1
-djangorestframework==3.3.3
+djangorestframework==3.11.2
 djorm-ext-pgfulltext==0.9.3
 model-mommy==1.2.6
 flake8==2.6.0
